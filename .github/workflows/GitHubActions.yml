@@ -10,9 +10,10 @@ name: QASE CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/*" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "feature/*" ]
+  workflow_dispatch:
 
 jobs:
   build:
