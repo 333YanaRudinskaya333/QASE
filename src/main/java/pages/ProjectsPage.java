@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import dict.Elements;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -12,6 +13,7 @@ public class ProjectsPage extends BasePage {
 
     private static final String PROJECT_NAME_FIELD = "#project-name";
     private static final String PROJECT_CODE_FIELD = "#project-code";
+    private static final By PROJECTS_TITLE = By.xpath("//h1[text()='Projects']");
 
     public ProjectsPage openPage() {
         open("/projects");

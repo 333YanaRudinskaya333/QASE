@@ -43,7 +43,7 @@ public class BaseTest {
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-infobars");
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         Configuration.browserCapabilities = options;
 
         loginPage = new LoginPage();
@@ -56,26 +56,8 @@ public class BaseTest {
         );
     }
 
-
-
     @AfterMethod
     public void tearDown() {
-        try {
-            projectsPage.openPage();
-            deleteProject("222tt");
-        } catch (Exception e) {
-            System.out.println("Не удалось удалить проект в AfterMethod: " + e.getMessage());
-        } finally {
-            getWebDriver().quit();
-        }
-    }
-
-    public void deleteProject(String project) {
-        $(byText(project))
-                .ancestor("tr")
-                .find("button[aria-label='Open action menu']")
-                .click();
-        $("[data-testid=remove]").click();
-        $x("//span[text()='Delete project']").click();
+        getWebDriver().quit();
     }
 }

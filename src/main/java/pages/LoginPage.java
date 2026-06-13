@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.shadowCss;
@@ -11,6 +12,7 @@ import static dict.Elements.*;
 public class LoginPage extends BasePage {
     private static final String LOGIN = "[name=email]";
     private static final String PASSWORD = "[name=password]";
+    private static final By LOGIN_TITLE = By.xpath("//h1[text()='Log in to your account']");
 
     public LoginPage openPage() {
         open("/login");
