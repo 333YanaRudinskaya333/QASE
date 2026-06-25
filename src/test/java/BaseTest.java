@@ -1,54 +1,74 @@
-import com.codeborne.selenide.AssertionMode;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.LoginPage;
-import pages.ProjectPage;
-import pages.ProjectsPage;
+import pages.*;
 
 import java.util.HashMap;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 public class BaseTest {
 
-    LoginPage loginPage;
-    ProjectsPage projectsPage;
-    ProjectPage projectPage;
+    protected LoginPage loginPage;
+    protected ProjectsPage projectsPage;
+    protected ProjectPage projectPage;
+    protected ResetPasswordPage resetPasswordPage;
+    protected ProfileSettingsPage profilePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true, description = "Настройка конфигурации и запуск браузера")
     public void setUp() {
-        Configuration.browser = "chrome";
+        String browserName = System.getProperty("browser", "chrome");
+
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
-        //Configuration.headless = true;
-        //Configuration.assertionMode = AssertionMode.SOFT;
         Configuration.browserSize = "1920x1080";
 
-        ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addArguments("--incognito");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        //options.addArguments("--headless");
-        Configuration.browserCapabilities = options;
+        HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+
+        if (browserName.equalsIgnoreCase("chrome")) {
+            Configuration.browser = "chrome";
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setExperimentalOption("prefs", prefs);
+            chromeOptions.addArguments("--incognito");
+            chromeOptions.addArguments("--disable-notifications");
+            chromeOptions.addArguments("--disable-popup-blocking");
+            chromeOptions.addArguments("--disable-infobars");
+
+            Configuration.browserCapabilities = chromeOptions;
+
+        } else if (browserName.equalsIgnoreCase("edge")) {
+            Configuration.browser = "edge";
+
+            org.openqa.selenium.edge.EdgeOptions edgeOptions = new org.openqa.selenium.edge.EdgeOptions();
+            edgeOptions.setExperimentalOption("prefs", prefs);
+            edgeOptions.addArguments("--incognito");
+            edgeOptions.addArguments("--disable-notifications");
+            edgeOptions.addArguments("--disable-popup-blocking");
+            edgeOptions.addArguments("--disable-infobars");
+
+            Configuration.browserCapabilities = edgeOptions;
+
+        } else {
+            Configuration.browser = "chrome";
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setExperimentalOption("prefs", prefs);
+            chromeOptions.addArguments("--incognito");
+            Configuration.browserCapabilities = chromeOptions;
+        }
 
         loginPage = new LoginPage();
         projectsPage = new ProjectsPage();
         projectPage = new ProjectPage();
+        resetPasswordPage = new ResetPasswordPage();
+        profilePage = new ProfileSettingsPage();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
