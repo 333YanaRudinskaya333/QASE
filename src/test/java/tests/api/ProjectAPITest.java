@@ -1,0 +1,34 @@
+package tests.api;
+
+import adapters.ProjectAdapter;
+import models.project.ProjectRq;
+import models.project.ProjectRs;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
+
+public class ProjectAPITest {
+    private final String CODE = "QA";
+
+    @Test(testName = "API: Успешное создание нового проекта")
+    public void checkCreateProject() {
+        ProjectRq rq = ProjectRq.builder()
+                .title("Project" + CODE)
+                .code(CODE)
+                .description("test")
+                .access("all")
+                .group("test")
+                .build();
+
+        ProjectRs rs = ProjectAdapter.createProject(rq);
+        assertTrue(rs.status);
+        assertEquals(rs.result.code, CODE);
+    }
+
+    @AfterMethod
+    public void deleteProject (){
+        ProjectAdapter.deleteProject(CODE);
+    }
+}

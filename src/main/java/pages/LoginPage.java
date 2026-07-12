@@ -1,18 +1,19 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.shadowCss;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 import static dict.Elements.*;
 
 public class LoginPage extends BasePage {
-    private static final String LOGIN = "[name=email]";
+    private static final String USER_NAME = "[name=email]";
     private static final String PASSWORD = "[name=password]";
     private static final By LOGIN_TITLE = By.xpath("//h1[text()='Log in to your account']");
+    private static final String ERRORS_FOR_EMPTY_USER_NAME_AND_PASSWORD = "//small[contains(text(), 'This field is required')]";
 
     public LoginPage openPage() {
         open("/login");
@@ -21,15 +22,34 @@ public class LoginPage extends BasePage {
 
     public ProjectsPage login(String user, String password) {
         $(shadowCss("#accept", "#usercentrics-cmp-ui")).click();
-        $(LOGIN).val(user);
+        $(USER_NAME).val(user);
         $(PASSWORD).val(password);
         $(byText(SIGN_IN_BUTTON)).click();
-        return new ProjectsPage();
+        return new ProjectsPage().isPageOpened();
+    }
+
+    public SelenideElement getErrorMessage() {
+        return $(byText(ERROR_MESSAGE_FOR_WRONG_USER_NAME_AND_PASSWORD));
+    }
+
+    public ElementsCollection getErrorsForEmptyUserNameAndPassword() {
+        return $$x(ERRORS_FOR_EMPTY_USER_NAME_AND_PASSWORD);
+    }
+
+    public LoginPage enterCredentials(String user, String password) {
+        $(USER_NAME).val(user);
+        $(PASSWORD).val(password);
+        return this;
+    }
+
+    public LoginPage clickSignInButton() {
+        $(byText(SIGN_IN_BUTTON)).click();
+        return this;
     }
 
     @Override
     public LoginPage isPageOpened() {
-        $(LOGIN_TITLE).shouldBe(Condition.visible);
+        $(LOGIN_TITLE).shouldBe(visible);
         return this;
     }
 }
