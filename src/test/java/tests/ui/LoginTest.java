@@ -1,21 +1,23 @@
+package tests.ui;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(testName = "Успешная авторизация с валидными учетными данными")
     public void loginWithPositiveCred() {
-        loginPage.openPage()
-                .login("rudinskaya.yana@gmail.com", "TeSt123Qq===");  //применить проперти ридер
+        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");  //применить проперти ридер
         projectsPage.getProjectTitle()
                 .shouldBe(visible)
                 .shouldHave(text("Projects"));
     }
 
-    @DataProvider(name = "Параметризованный тест для негативного логина с заполненными некорректными именем пользователя и(или) паролем")
+    @DataProvider(name = "negativeLoginData")
     public Object[][] loginData() {
         return new Object[][]{
                 {"11123131312xxxq@gmail.ru", "TeSt123Qq===", "Поле имя пользователя должно быть невалидным"}, //применить проперти ридер
@@ -24,29 +26,27 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "Параметризованный тест для негативного логина с заполненными некорректными именем пользователя и(или) паролем")
+    @Test(
+            dataProvider = "negativeLoginData",
+            testName = "Негативный сценарий авторизации с некорректными данными"
+    )
     public void loginWithNegativeCred(String user, String password, String errorMessage) {
-        loginPage.openPage()
-                .login(user, password);
+        loginStep.loginWithInvalidCredentials(user, password);
         loginPage.getErrorMessage()
                 .shouldBe(visible)
                 .shouldHave(text("These credentials do not match our records."));
     }
 
-    @Test
+    @Test(testName = "Попытка авторизации с пустыми полями ввода")
     public void loginWithEmptyCred() {
-        loginPage.openPage()
-                .login("", ""); //применить проперти ридер
+        loginStep.loginWithEmptyFields();
         loginPage.getErrorsForEmptyUserNameAndPassword()
                 .shouldHave(texts("This field is required", "This field is required"));
     }
 
-    @Test
+    @Test(testName = "Успешный выход из системы (LogOut)")
     public void logOutTest() {
-        loginPage.openPage()
-                .login("rudinskaya.yana@gmail.com", "TeSt123Qq===")//применить проперти ридер
-                .isPageOpened()
-                .signOut()
-                .isPageOpened();
+        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.logout();
     }
 }

@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import dict.Elements;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -73,6 +72,14 @@ public class ProjectsPage extends BasePage {
     }
     public SelenideElement getRowsPerPageDropdown() {
         return rowsPerPageDropdown;
+    }
+
+    public ProjectsPage cancelCreateProject() {
+        $(byText(CREATE_NEW_PROJECT_BUTTON)).click();      //уже используются в методе createProject вынести в степы
+        $(PROJECT_NAME_FIELD).setValue("222tt");           //уже используются в методе createProject вынести в степы
+        $(PROJECT_CODE_FIELD).setValue("111dd");           //уже используются в методе createProject вынести в степы
+        $(byText(CANCEL_BUTTON_ON_CREATE_NEW_PROJECT_POP_UP)).click();
+        return this;
     }
 
     @Override

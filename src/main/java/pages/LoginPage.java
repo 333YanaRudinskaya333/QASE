@@ -36,6 +36,17 @@ public class LoginPage extends BasePage {
         return $$x(ERRORS_FOR_EMPTY_USER_NAME_AND_PASSWORD);
     }
 
+    public LoginPage enterCredentials(String user, String password) {
+        $(USER_NAME).val(user);
+        $(PASSWORD).val(password);
+        return this;
+    }
+
+    public LoginPage clickSignInButton() {
+        $(byText(SIGN_IN_BUTTON)).click();
+        return this;
+    }
+
     @Override
     public LoginPage isPageOpened() {
         $(LOGIN_TITLE).shouldBe(visible);
