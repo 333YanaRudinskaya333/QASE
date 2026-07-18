@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","374","checkUpdateCase","Surefire suite","2026-07-18","passed","2026-07-18","tests.api.CaseAPITest","Surefire test","tests.api.CaseAPITest","checkUpdateCase"
+"","368","checkGetSingleTestCase","Surefire suite","2026-07-18","passed","2026-07-18","tests.api.CaseAPITest","Surefire test","tests.api.CaseAPITest","checkGetSingleTestCase"
+"","442","checkCreateCase","Surefire suite","2026-07-18","passed","2026-07-18","tests.api.CaseAPITest","Surefire test","tests.api.CaseAPITest","checkCreateCase"
+"","3757","checkCreateProject","Surefire suite","2026-07-18","passed","2026-07-18","tests.api.ProjectAPITest","Surefire test","tests.api.ProjectAPITest","checkCreateProject"
