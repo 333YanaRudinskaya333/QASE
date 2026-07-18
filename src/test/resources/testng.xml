@@ -7,34 +7,23 @@
         <listener class-name="tests.listeners.TestListener"/>
     </listeners>
 
-<!--    <test name="UI Tests">-->
-<!--        <classes>-->
-<!--            <class name="tests.ui.ChangeProfileSettingsTest"/>-->
-<!--            <class name="tests.ui.ForgotPasswordTest"/>-->
-<!--            <class name="tests.ui.LoginTest"/>-->
-<!--            <class name="tests.ui.ProjectSortingTest"/>-->
-<!--            <class name="tests.ui.ProjectTest"/>-->
-<!--            <class name="tests.ui.SuiteTest"/>-->
-<!--            <class name="tests.ui.TestCaseTest"/>-->
-<!--            <class name="tests.ui.TestPlanTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="API Tests">-->
-<!--        <classes>-->
-<!--            <class name="tests.api.CaseAPITest"/>-->
-<!--            <class name="tests.api.ProjectAPITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
     <test name="UI Tests">
         <classes>
-            <class name="tests.ui.LoginTest">
-                <!-- Указываем конкретные методы для запуска -->
-                <methods>
-                    <include name="loginWithPositiveCred"/>
-                </methods>
-            </class>
+            <class name="tests.ui.ChangeProfileSettingsTest"/>
+            <class name="tests.ui.ForgotPasswordTest"/>
+            <class name="tests.ui.LoginTest"/>
+            <class name="tests.ui.ProjectSortingTest"/>
+            <class name="tests.ui.ProjectTest"/>
+            <class name="tests.ui.SuiteTest"/>
+            <class name="tests.ui.TestCaseTest"/>
+            <class name="tests.ui.TestPlanTest"/>
+        </classes>
+    </test>
+
+    <test name="API Tests">
+        <classes>
+            <class name="tests.api.CaseAPITest"/>
+            <class name="tests.api.ProjectAPITest"/>
         </classes>
     </test>
 

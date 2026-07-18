@@ -1,5 +1,9 @@
 package tests.ui;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +14,9 @@ import static com.codeborne.selenide.Condition.visible;
 public class LoginTest extends BaseTest {
 
     @Test(testName = "Успешная авторизация с валидными учетными данными")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Login")
+    @Severity(SeverityLevel.CRITICAL)
     public void loginWithPositiveCred() {
         loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");  //применить проперти ридер
         projectsPage.getProjectTitle()
@@ -30,6 +37,9 @@ public class LoginTest extends BaseTest {
             dataProvider = "negativeLoginData",
             testName = "Негативный сценарий авторизации с некорректными данными"
     )
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Login")
+    @Severity(SeverityLevel.MINOR)
     public void loginWithNegativeCred(String user, String password, String errorMessage) {
         loginStep.loginWithInvalidCredentials(user, password);
         loginPage.getErrorMessage()
@@ -38,6 +48,9 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(testName = "Попытка авторизации с пустыми полями ввода")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Login")
+    @Severity(SeverityLevel.MINOR)
     public void loginWithEmptyCred() {
         loginStep.loginWithEmptyFields();
         loginPage.getErrorsForEmptyUserNameAndPassword()
@@ -45,6 +58,9 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(testName = "Успешный выход из системы (LogOut)")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Login")
+    @Severity(SeverityLevel.CRITICAL)
     public void logOutTest() {
         loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
         loginStep.logout();

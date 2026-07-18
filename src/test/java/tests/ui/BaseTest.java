@@ -3,20 +3,24 @@ package tests.ui;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.*;
-import steps.LoginStep;
-import steps.ProjectStep;
-import steps.SuiteStep;
-import steps.TestPlanStep;
+import org.testng.annotations.Listeners;
+import tests.listeners.TestListener;
+import ui.pages.*;
+import ui.steps.LoginStep;
+import ui.steps.ProjectStep;
+import ui.steps.SuiteStep;
+import ui.steps.TestPlanStep;
 
 import java.util.HashMap;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-
+@Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
     protected LoginPage loginPage;
     protected ProjectsPage projectsPage;
@@ -33,7 +37,7 @@ public class BaseTest {
     protected TestPlanStep testPlanStep;
 
     @BeforeMethod(alwaysRun = true, description = "Настройка конфигурации и запуск браузера")
-    public void setUp() {
+    public void setUp(ITestContext iTestContext) {
         String browserName = System.getProperty("browser", "chrome");
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
@@ -82,9 +86,9 @@ public class BaseTest {
         trashBinPage = new TrashBinPage();
         testPlanPage = new TestPlansPage();
         createTestPlanPage = new CreateTestPlanPage();
-        loginStep = new steps.LoginStep();
-        projectStep = new steps.ProjectStep();
-        suiteStep = new steps.SuiteStep();
+        loginStep = new LoginStep();
+        projectStep = new ProjectStep();
+        suiteStep = new SuiteStep();
         testPlanStep = new TestPlanStep();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
