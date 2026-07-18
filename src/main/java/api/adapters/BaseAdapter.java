@@ -31,7 +31,6 @@ public class BaseAdapter {
 
     static {
         log.info("Initializing REST Assured Request Specification with Logging Filters");
-
         spec = new RequestSpecBuilder()
                 .setBaseUri("https://api.qase.io")
                 .setBasePath("/v1")

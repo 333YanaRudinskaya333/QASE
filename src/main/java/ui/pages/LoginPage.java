@@ -30,7 +30,7 @@ public class LoginPage extends BasePage {
         return WebDriverRunner.url().contains("/projects");
     }
 
-    @Step("Выполнить вход в систему под пользователем: '{user}'")
+    @Step("Выполнить вход в систему")
     public ProjectsPage login(String user, String password) {
         log.info("Attempting full login flow for user: '{}'", user);
         if (isUserAlreadyAuthorized()) {
@@ -58,7 +58,7 @@ public class LoginPage extends BasePage {
         return $$x(ERRORS_FOR_EMPTY_USER_NAME_AND_PASSWORD);
     }
 
-    @Step("Ввести логин: '{user}' и пароль: '*******'")
+    @Step("Ввести логин и пароль")
     public LoginPage enterCredentials(String user, String password) {
         log.info("Entering credentials for user: '{}' (password: *******)", user);
         $(USER_NAME).val(user);

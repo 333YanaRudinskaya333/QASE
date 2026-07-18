@@ -11,7 +11,7 @@ public class LoginStep {
     private final LoginPage loginPage = new LoginPage();
     private final ProjectsPage projectsPage = new ProjectsPage();
 
-    @Step("Успешная авторизация в системе под пользователем: {user}")
+    @Step("Успешная авторизация в системе под пользователем")
     public ProjectsPage loginWithCredentials(String user, String password) {
         log.info("Выполняется успешный вход в систему для пользователя: {}", user);
         loginPage.openPage()
@@ -20,7 +20,7 @@ public class LoginStep {
         return projectsPage.isPageOpened();
     }
 
-    @Step("Попытка авторизации с некорректными данными. Пользователь: {user}")
+    @Step("Попытка авторизации с некорректными данными.")
     public LoginPage loginWithInvalidCredentials(String user, String password) {
         log.info("Попытка авторизации с некорректными учетными данными. Пользователь: {}", user);
         return loginPage.openPage()
