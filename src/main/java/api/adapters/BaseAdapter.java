@@ -21,7 +21,6 @@ public class BaseAdapter {
             .setPrettyPrinting()
             .create();
 
-
     public static final RequestSpecification spec;
 
     public static final ResponseSpecification ok200 = new ResponseSpecBuilder()
