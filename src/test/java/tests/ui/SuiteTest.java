@@ -19,7 +19,7 @@ public class SuiteTest extends BaseTest {
     @Feature("Suit")
     @Severity(SeverityLevel.CRITICAL)
     public void createSuite() {
-        projectStep.loginAndCreateTestProject("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
+        projectStep.loginAndCreateTestProject(user, password, PROJECT_NAME, PROJECT_CODE);
         projectPage.clickCreateNewSuit()
                 .getPopUpTitleElement().shouldHave(Condition.text("Create suite"));
         projectPage.fillSuiteForm(SUIT_NAME, "TestDescription", "TestPreCondition")
@@ -32,7 +32,7 @@ public class SuiteTest extends BaseTest {
     @Feature("Suit")
     @Severity(SeverityLevel.MINOR)
     public void cancelCreateSuite() {
-        projectStep.loginAndCreateTestProject("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
+        projectStep.loginAndCreateTestProject(user, password, PROJECT_NAME, PROJECT_CODE);
         projectPage.clickCreateNewSuit()
                 .getPopUpTitleElement().shouldHave(Condition.text("Create suite"));
         projectPage.fillSuiteForm(SUIT_NAME, "TestDescription", "TestPreCondition")
@@ -45,7 +45,7 @@ public class SuiteTest extends BaseTest {
     @Feature("Suit")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteSuite() {
-        suiteStep.loginCreateProjectAndSuite("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
+        suiteStep.loginCreateProjectAndSuite(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.deleteSuit(SUIT_NAME)
                 .getNotificationForSuccessSuitDelete().shouldHave(Condition.text("Suite was successfully deleted."));
     }

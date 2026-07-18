@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
     @Feature("Login")
     @Severity(SeverityLevel.CRITICAL)
     public void loginWithPositiveCred() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");  //применить проперти ридер
+        loginStep.loginWithCredentials(user, password);
         projectsPage.getProjectTitle()
                 .shouldBe(visible)
                 .shouldHave(text("Projects"));
@@ -27,9 +27,9 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "negativeLoginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"11123131312xxxq@gmail.ru", "TeSt123Qq===", "Поле имя пользователя должно быть невалидным"}, //применить проперти ридер
-                {"rudinskaya.yana@gmail.com", "TeSt123Qq===111", "Пароль для входа должен быть невалидный"}, //применить проперти ридер
-                {"11123131312xxxq@gmail.ru", "TeSt123Qq===111", "Поля имя пользователя и пароль должны быть невалидными"}
+                {"11123131312xxxq@gmail.ru", password, "Поле имя пользователя должно быть невалидным"},
+                {user, "TeSt123Qq===111", "Пароль для входа должен быть невалидный"},
+                {"11123131312xxxq@gmail.ru", "invalidPassword", "Поля имя пользователя и пароль должны быть невалидными"}
         };
     }
 
@@ -62,7 +62,7 @@ public class LoginTest extends BaseTest {
     @Feature("Login")
     @Severity(SeverityLevel.CRITICAL)
     public void logOutTest() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.loginWithCredentials(user, password);
         loginStep.logout();
     }
 }

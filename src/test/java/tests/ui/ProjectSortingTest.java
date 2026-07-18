@@ -19,7 +19,7 @@ public class ProjectSortingTest extends BaseTest {
     @Feature("Sorting")
     @Severity(SeverityLevel.MINOR)
     public void sortZAProjects() {
-        projectStep.loginCreateProjectAndReturnToProjectsPage("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
+        projectStep.loginCreateProjectAndReturnToProjectsPage(user, password, PROJECT_NAME, PROJECT_CODE);
         projectsPage.clickSortByProjectsNameButton()
                 .getProjectNames().shouldHave(CollectionCondition.exactTexts(" Sharelane", " 222tt"));
     }
@@ -29,7 +29,7 @@ public class ProjectSortingTest extends BaseTest {
     @Feature("Sorting")
     @Severity(SeverityLevel.MINOR)
     public void sortAZProjects() {
-        projectStep.loginCreateProjectAndReturnToProjectsPage("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
+        projectStep.loginCreateProjectAndReturnToProjectsPage(user, password, PROJECT_NAME, PROJECT_CODE);
         projectsPage.clickSortByProjectsNameButton()
                 .clickSortByProjectsNameButton()
                 .getProjectNames().shouldHave(CollectionCondition.exactTexts(" 222tt", " Sharelane"));
@@ -40,7 +40,7 @@ public class ProjectSortingTest extends BaseTest {
     @Feature("Sorting")
     @Severity(SeverityLevel.MINOR)
     public void changeRowsCountPerPage() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.loginWithCredentials(user, password);
         projectsPage.isPageOpened()
                 .selectRowsPerPage(50)
                 .getRowsPerPageDropdown().shouldHave(Condition.text("50"));

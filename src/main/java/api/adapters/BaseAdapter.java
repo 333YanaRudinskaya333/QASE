@@ -1,5 +1,6 @@
 package api.adapters;
 
+import api.utils.PropertyReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.restassured.builder.RequestSpecBuilder;
@@ -14,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class BaseAdapter {
-    public static String TOKEN = "e67f693f16e32878286b5575271f864de16aa51c79bfa3038d63d8018a075a6a"; //скпрятать токен
+    public static final String TOKEN = PropertyReader.getProperty("token");
     public static Gson GSON = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .setPrettyPrinting()

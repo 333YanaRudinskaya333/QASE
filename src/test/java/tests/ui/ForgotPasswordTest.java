@@ -17,7 +17,7 @@ public class ForgotPasswordTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void resetPasswordWithValidEmail() {
         resetPasswordPage.openPage()
-                .resetPassword("123rudinskaya.yana@gmail.com"); //применить проперти ридер
+                .resetPassword(user);
         resetPasswordPage.getNotificationForSuccessfulReset()
                 .shouldBe(visible)
                 .shouldHave(text("We have e-mailed your password reset link!"));

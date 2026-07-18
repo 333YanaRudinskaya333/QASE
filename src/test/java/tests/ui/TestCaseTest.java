@@ -38,7 +38,7 @@ public class TestCaseTest extends BaseTest {
     @Feature("Test case")
     @Severity(SeverityLevel.CRITICAL)
     public void createTestCase() {
-        suiteStep.loginCreateProjectAndSuite("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
+        suiteStep.loginCreateProjectAndSuite(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.clickManualTestButton();
         createTestCasePage.isPageOpened()
                 .fillTestCaseForm(testCase)
@@ -52,7 +52,7 @@ public class TestCaseTest extends BaseTest {
     @Feature("Test case")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteAllTestCases() {
-        suiteStep.loginCreateProjectAndSuite("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
+        suiteStep.loginCreateProjectAndSuite(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.clickManualTestButton();
         createTestCasePage.isPageOpened()
                 .fillTestCaseForm(testCase)
@@ -73,7 +73,7 @@ public class TestCaseTest extends BaseTest {
     @Feature("Test case")
     @Severity(SeverityLevel.CRITICAL)
     public void createQuickTestCase() {
-        suiteStep.loginCreateProjectSuiteAndSelectIt("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
+        suiteStep.loginCreateProjectSuiteAndSelectIt(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.createQuickTest("qqq123")
                 .getSelectAllButton().shouldBe(Condition.hidden);
     }
@@ -83,7 +83,7 @@ public class TestCaseTest extends BaseTest {
     @Feature("Test case")
     @Severity(SeverityLevel.CRITICAL)
     public void restoreTestCase() {
-        suiteStep.loginCreateProjectSuiteAndSelectIt("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
+        suiteStep.loginCreateProjectSuiteAndSelectIt(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.createQuickTest("qqq123")
                 .getSelectAllButton().shouldBe(Condition.hidden);
         projectPage.clickSelectAllButton()
@@ -102,7 +102,7 @@ public class TestCaseTest extends BaseTest {
     @Feature("Test case")
     @Severity(SeverityLevel.MINOR)
     public void cancelCreateProject() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.loginWithCredentials(user, password);
         projectsPage.cancelCreateProject()
                 .getProjectTitle().shouldHave(Condition.text("Projects"));
     }

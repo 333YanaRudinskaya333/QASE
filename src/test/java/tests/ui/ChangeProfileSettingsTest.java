@@ -13,7 +13,7 @@ public class ChangeProfileSettingsTest extends BaseTest {
     @Feature("Profile")
     @Severity(SeverityLevel.NORMAL)
     public void changeValidProfilePicture() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");  //применить проперти ридер
+        loginStep.loginWithCredentials(user, password);  //применить проперти ридер
         profilePage.openPage()
                 .changeProfilePicture("avatar.png")
                 .getNotificationForSuccessfulAvatarUpload()

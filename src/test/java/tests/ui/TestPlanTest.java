@@ -19,7 +19,7 @@ public class TestPlanTest extends BaseTest {
     @Feature("Test plan")
     @Severity(SeverityLevel.CRITICAL)
     public void createTestPlan() {
-        suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
+        suiteStep.loginCreateProjectSuiteAndCase(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
     }
 
@@ -28,7 +28,7 @@ public class TestPlanTest extends BaseTest {
     @Feature("Test plan")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteTestPlan() {
-        suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
+        suiteStep.loginCreateProjectSuiteAndCase(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
         testPlanPage.clickCheckboxForTestPlan(PLAN_NAME)
                 .clickActionsMenuForTestPlan(PLAN_NAME)
@@ -44,7 +44,7 @@ public class TestPlanTest extends BaseTest {
     @Feature("Test plan")
     @Severity(SeverityLevel.MINOR)
     public void cloneTestPlan() {
-        suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
+        suiteStep.loginCreateProjectSuiteAndCase(user, password, PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
         testPlanPage.clickCheckboxForTestPlan(PLAN_NAME)
                 .clickActionsMenuForTestPlan(PLAN_NAME)

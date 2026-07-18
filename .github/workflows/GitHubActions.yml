@@ -13,6 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      USER: ${{secrets.QASE_USER}}
+      PASSWORD: ${{secrets.QASE_PASSWORD}}
+      SECRET_TOKEN: ${{ secrets.QASE_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -26,7 +30,7 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: mvn clean test -Dheadless=true -Dbrowser=chrome
+        run: mvn clean test -Duser=$USER -Dpassword=$PASSWORD -Dtoken=$SECRET_TOKEN -Dheadless=true -Dbrowser=chrome
 
       - name: Get Allure history
         uses: actions/checkout@v4

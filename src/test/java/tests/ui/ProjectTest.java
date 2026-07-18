@@ -21,7 +21,7 @@ public class ProjectTest extends BaseTest {
     @Feature("Project")
     @Severity(SeverityLevel.CRITICAL)
     public void checkCreateProject() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.loginWithCredentials(user, password);
         projectStep.createNewProject(PROJECT_NAME, PROJECT_CODE);
         $(REPOSITORY_TITLE).shouldHave(Condition.text(PROJECT_NAME));
     }
@@ -31,7 +31,7 @@ public class ProjectTest extends BaseTest {
     @Feature("Project")
     @Severity(SeverityLevel.MINOR)
     public void cancelCreateProject() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
+        loginStep.loginWithCredentials(user, password);
         projectsPage.cancelCreateProject()
                 .getProjectTitle().shouldHave(Condition.text("Projects"));
     }
