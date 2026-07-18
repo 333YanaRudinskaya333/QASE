@@ -1,11 +1,15 @@
 package tests.api;
 
-import adapters.CaseAdapter;
-import adapters.ProjectAdapter;
-import models.cases.CaseRq;
-import models.cases.CaseRs;
-import models.cases.SingleCaseRs;
-import models.project.ProjectRq;
+import api.adapters.CaseAdapter;
+import api.adapters.ProjectAdapter;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import api.models.cases.CaseRq;
+import api.models.cases.CaseRs;
+import api.models.cases.SingleCaseRs;
+import api.models.project.ProjectRq;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,6 +35,9 @@ public class CaseAPITest {
     }
 
     @Test(testName = "API: Успешное создание нового тест-кейса")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("API Case")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkCreateCase() {
         CaseRq rq = CaseRq.builder()
                 .code(CODE)
@@ -55,6 +62,9 @@ public class CaseAPITest {
             dependsOnMethods = "checkCreateCase",
             testName = "API: Успешное обновление полей существующего тест-кейса"
     )
+    @Owner("Rudinskaya Y.V.")
+    @Feature("API Case")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkUpdateCase() {
         CaseRq updateRq = CaseRq.builder()
                 .title("NEW updated title")
@@ -70,6 +80,9 @@ public class CaseAPITest {
             dependsOnMethods = "checkCreateCase",
             testName = "API: Получение информации о конкретном тест-кейсе по ID"
     )
+    @Owner("Rudinskaya Y.V.")
+    @Feature("API Case")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkGetSingleTestCase() {
         SingleCaseRs response = CaseAdapter.getCase(CODE, createdCaseId);
         assertTrue(response.getStatus(), "Статус ответа должен быть true");
@@ -80,6 +93,9 @@ public class CaseAPITest {
     }
 
     @AfterClass(alwaysRun = true)
+    @Owner("Rudinskaya Y.V.")
+    @Feature("API Case")
+    @Severity(SeverityLevel.CRITICAL)
     public void deleteCase() {
         if (createdCaseId != 0) {
             CaseAdapter.deleteCase(CODE, createdCaseId);

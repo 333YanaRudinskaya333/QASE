@@ -1,5 +1,9 @@
 package tests.ui;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -8,6 +12,9 @@ import static com.codeborne.selenide.Condition.visible;
 public class ForgotPasswordTest extends BaseTest {
 
     @Test(testName = "Восстановление пароля с вводом валидного email")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Forgot password")
+    @Severity(SeverityLevel.CRITICAL)
     public void resetPasswordWithValidEmail() {
         resetPasswordPage.openPage()
                 .resetPassword("123rudinskaya.yana@gmail.com"); //применить проперти ридер
@@ -17,6 +24,9 @@ public class ForgotPasswordTest extends BaseTest {
     }
 
     @Test(testName = "Восстановление пароля с вводом НЕ валидного email")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Forgot password")
+    @Severity(SeverityLevel.MINOR)
     public void resetPasswordWithInvalidEmailValue() {
         String invalidEmail = "11111";
         resetPasswordPage.openPage()
@@ -27,6 +37,9 @@ public class ForgotPasswordTest extends BaseTest {
     }
 
     @Test(testName = "Восстановление пароля с вводом пустого email")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Forgot password")
+    @Severity(SeverityLevel.MINOR)
     public void resetPasswordWithEmptyEmail() {
         resetPasswordPage.openPage()
                 .resetPassword("");
@@ -36,6 +49,9 @@ public class ForgotPasswordTest extends BaseTest {
     }
 
     @Test(testName = "Переход на страницу логина со страницы восстановления пароля")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Forgot password")
+    @Severity(SeverityLevel.MINOR)
     public void goToTheLogInPage() {
         resetPasswordPage
                 .openPage()

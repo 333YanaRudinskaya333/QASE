@@ -1,6 +1,10 @@
 package tests.ui;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -11,12 +15,18 @@ public class TestPlanTest extends BaseTest {
     private final  String PLAN_NAME = "Titletest";
 
     @Test(groups = "with-project", testName = "Создание нового тест-плана с тест-кейсами")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Test plan")
+    @Severity(SeverityLevel.CRITICAL)
     public void createTestPlan() {
         suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
     }
 
     @Test(groups = "with-project", testName = "Успешное удаление существующего тест-плана")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Test plan")
+    @Severity(SeverityLevel.CRITICAL)
     public void deleteTestPlan() {
         suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
@@ -30,6 +40,9 @@ public class TestPlanTest extends BaseTest {
     }
 
     @Test(groups = "with-project", testName = "Клонирование тест-плана через меню действий")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Test plan")
+    @Severity(SeverityLevel.MINOR)
     public void cloneTestPlan() {
         suiteStep.loginCreateProjectSuiteAndCase("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME, "qqq123");
         testPlanStep.createTestPlan(PROJECT_CODE, PLAN_NAME, "DescriptionTest");
@@ -41,14 +54,10 @@ public class TestPlanTest extends BaseTest {
                 .getNotificationForSuccessfulClone().shouldHave(Condition.text("Test plan was cloned successfully!"));
     }
 
-    @Test(testName = "Отмена создания проекта на странице проектов")
-    public void cancelCreateProject() {
-        loginStep.loginWithCredentials("rudinskaya.yana@gmail.com", "TeSt123Qq===");
-        projectsPage.cancelCreateProject()
-                .getProjectTitle().shouldHave(Condition.text("Projects"));
-    }
-
     @AfterMethod(onlyForGroups = "with-project")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Delete project")
+    @Severity(SeverityLevel.CRITICAL)
     public void tearDown() {
         projectStep.deleteProjectIfExists(PROJECT_NAME);
     }

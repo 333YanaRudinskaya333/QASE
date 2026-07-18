@@ -1,6 +1,10 @@
 package tests.ui;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -11,6 +15,9 @@ public class SuiteTest extends BaseTest {
     private final String SUIT_NAME = "TestName";
 
     @Test(groups = "with-project", testName = "Успешное создание нового тест-сьюта")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Suit")
+    @Severity(SeverityLevel.CRITICAL)
     public void createSuite() {
         projectStep.loginAndCreateTestProject("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
         projectPage.clickCreateNewSuit()
@@ -21,6 +28,9 @@ public class SuiteTest extends BaseTest {
     }
 
     @Test(groups = "with-project", testName = "Отмена создания тест-сьюта")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Suit")
+    @Severity(SeverityLevel.MINOR)
     public void cancelCreateSuite() {
         projectStep.loginAndCreateTestProject("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE);
         projectPage.clickCreateNewSuit()
@@ -31,6 +41,9 @@ public class SuiteTest extends BaseTest {
     }
 
     @Test(groups = "with-project", testName = "Удаление тест-сьюта из репозитория")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Suit")
+    @Severity(SeverityLevel.CRITICAL)
     public void deleteSuite() {
         suiteStep.loginCreateProjectAndSuite("rudinskaya.yana@gmail.com", "TeSt123Qq===", PROJECT_NAME, PROJECT_CODE, SUIT_NAME);
         projectPage.deleteSuit(SUIT_NAME)
@@ -38,6 +51,9 @@ public class SuiteTest extends BaseTest {
     }
 
     @AfterMethod(onlyForGroups = "with-project")
+    @Owner("Rudinskaya Y.V.")
+    @Feature("Delete project")
+    @Severity(SeverityLevel.CRITICAL)
     public void tearDown() {
         projectStep.deleteProjectIfExists(PROJECT_NAME);
     }
