@@ -16,7 +16,7 @@ jobs:
     env:
       USER: ${{secrets.QASE_USER}}
       PASSWORD: ${{secrets.QASE_PASSWORD}}
-      SECRET_TOKEN: ${{ secrets.QASE_TOKEN}}
+      SECRET_TOKEN: ${{secrets.QASE_TOKEN}}
 
     steps:
       - name: Checkout repository

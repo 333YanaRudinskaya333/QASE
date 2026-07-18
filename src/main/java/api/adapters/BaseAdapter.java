@@ -15,7 +15,9 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class BaseAdapter {
-    public static final String TOKEN = PropertyReader.getProperty("token");
+    public static final String TOKEN = System.getProperty("token") != null
+            ? System.getProperty("token")
+            : PropertyReader.getProperty("token");
     public static Gson GSON = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .setPrettyPrinting()
