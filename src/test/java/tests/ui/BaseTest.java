@@ -39,10 +39,12 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true, description = "Настройка конфигурации и запуск браузера")
     public void setUp(ITestContext iTestContext) {
         String browserName = System.getProperty("browser", "chrome");
+        boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
         Configuration.browserSize = "1920x1080";
+        Configuration.headless = isHeadless;
         HashMap<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
@@ -55,6 +57,12 @@ public class BaseTest {
             chromeOptions.addArguments("--disable-notifications");
             chromeOptions.addArguments("--disable-popup-blocking");
             chromeOptions.addArguments("--disable-infobars");
+
+            if (isHeadless) {
+                chromeOptions.addArguments("--disable-gpu");
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+            }
 
             Configuration.browserCapabilities = chromeOptions;
 

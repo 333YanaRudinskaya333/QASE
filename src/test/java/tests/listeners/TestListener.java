@@ -1,5 +1,6 @@
 package tests.listeners;
 
+import com.codeborne.selenide.WebDriverRunner;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -27,8 +28,12 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         log.error("======================================== FAILED TEST {}  Duration: {} ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
-        WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-        AllureUtils.takeScreenshot(driver);
+        if (WebDriverRunner.hasWebDriverStarted()) {
+            WebDriver driver = WebDriverRunner.getWebDriver();
+            AllureUtils.takeScreenshot(driver);
+        } else {
+            log.error("Cannot take screenshot: Browser driver was not started or failed during initialization.");
+        }
     }
 
     @Override
