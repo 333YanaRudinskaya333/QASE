@@ -1,7 +1,7 @@
 package tests.ui;
 
 import com.codeborne.selenide.Condition;
-import dto.TestCase;
+import ui.dto.TestCase;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;

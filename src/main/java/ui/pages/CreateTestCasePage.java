@@ -1,5 +1,5 @@
 package ui.pages;
-import dto.TestCase;
+import ui.dto.TestCase;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;

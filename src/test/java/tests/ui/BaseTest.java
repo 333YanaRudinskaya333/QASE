@@ -1,14 +1,13 @@
 package tests.ui;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 import tests.listeners.TestListener;
 import api.utils.PropertyReader;
 import ui.pages.*;
@@ -40,9 +39,11 @@ public class BaseTest {
     String user = System.getProperty("user", PropertyReader.getProperty("user"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
+    @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка конфигурации и запуск браузера")
-    public void setUp(ITestContext iTestContext) {
-        String browserName = System.getProperty("browser", "chrome");
+    public void setUp(@Optional("chrome") String xmlBrowser, ITestContext iTestContext) {
+        Selenide.closeWebDriver();
+        String browserName = System.getProperty("browser", xmlBrowser);
         boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
@@ -109,8 +110,8 @@ public class BaseTest {
         );
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        getWebDriver().quit();
+        Selenide.closeWebDriver();
     }
 }

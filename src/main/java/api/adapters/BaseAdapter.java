@@ -3,6 +3,7 @@ package api.adapters;
 import api.utils.PropertyReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -36,7 +37,7 @@ public class BaseAdapter {
                 .setBasePath("/v1")
                 .setContentType(ContentType.JSON)
                 .addHeader("Token", TOKEN)
-                // Добавляем фильтры для автоматического логирования запросов и ответов
+                .addFilter(new AllureRestAssured())
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
                 .build();
